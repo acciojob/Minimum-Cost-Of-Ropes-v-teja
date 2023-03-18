@@ -1,20 +1,26 @@
-function calculateMinCost() {
-  var inputData = document.querySelector("input").value;
-var inputArray = inputData.split(",");
+function minCost(event) {
 
-	for(let i=0;i<inputArray.length;i++){
-		inputArray[i] = Number(inputArray[i]);
+	event.preventDefault();
+	var inputElement = document.querySelector('input').value;
+	var arr = inputElement.split(',');
+
+	arr.sort(function (a , b) {return a - b});
+
+	var cost = 0;
+	var res =0;
+	while(arr.length > 1){
+		var res = Number(arr[0]) + Number(arr[1]);
+		
+		
+		
+
+		arr.shift();
+		arr.shift();
+		arr.push(res);
+		cost += res;
+		
+		
+		arr.sort(function (a , b) {return a -b});
 	}
-	var cost =0;
-
-	while(inputArray.length>1){
-		inputArray.sort(function (a,b){return a-b;});
-		var newRope = inputArray[0]+inputArray[1];
-		cost+=newRope;
-		inputArray.splice(0,2);
-		inputArray.push(newRope);
-	}
-	//alert(cost);
-	document.querySelector("#result").textContent = cost;
-}  
-
+	document.getElementById("result").textContent = cost;
+}
